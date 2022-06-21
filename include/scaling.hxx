@@ -1,3 +1,4 @@
+// Programmed By : Hossain Md. Fahim
 namespace scale
 {
   extern float s_thickness;

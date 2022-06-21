@@ -1,3 +1,4 @@
+// Programmed By : Hossain Md. Fahim
 namespace scale
 {
   float s_thickness{1.f / 124.18181f};
