@@ -1,7 +1,7 @@
 # Woman Pong Source Code
 This repository contains the source code of the 'Woman Pong' game. Currently only a linux distribution is supported for direct build of the game. If you are building for any other OS other than a linux derivative, then you will have to build it yourself manually.
 
-## This project has the following dependancies:
+## This project has the following dependencies:
 * Latest version of SDL2
 * Any compiler which supports the latest C++ standard aka C++20. Edit the cmake configuration file according to the compiler that you use. This project uses the GNU clang by default.
 * cmake
