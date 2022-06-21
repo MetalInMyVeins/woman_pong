@@ -17,3 +17,4 @@ target_compile_options(woman_pong PRIVATE -std=c++20 -Wall -Wextra -Wpedantic -W
 add_library(woman_ponglib SHARED ${library_sources})
 target_link_libraries(woman_pong woman_ponglib -lSDL2main -lSDL2_image -lSDL2_ttf -lX11 -static-libgcc -static-libstdc++)
 
+
