@@ -1,5 +1,5 @@
 #!/bin/sh
-mkdir bin build lib;
+mkdir build;
 cd build;
 cmake ..;
 make;
