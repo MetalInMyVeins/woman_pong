@@ -1,20 +1,36 @@
-cmake_minimum_required(VERSION 3.16.3)
+cmake_minimum_required(VERSION 3.21)
 project(woman_pong)
+set(CMAKE_C_STANDARD 18)
 set(CMAKE_CXX_STANDARD 20)
 
-set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/bin)
+set(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/lib)
 
-file(GLOB library_sources "src/*.cxx")
-file(GLOB library_headers "include/*.hxx")
+add_compile_options(-std=c++20 -g -Wall -Wextra -Wpedantic -Werror)
+include_directories(${CMAKE_SOURCE_DIR}/include)
 
-include_directories(${CMAKE_SOURCE_DIR}/include "/usr/include/SDL2")
-set(includes ${library_headers})
+add_library(libwoman_pong STATIC
+  ${CMAKE_SOURCE_DIR}/src/constructor.cxx
+  ${CMAKE_SOURCE_DIR}/src/extras.cxx
+  ${CMAKE_SOURCE_DIR}/src/f2i.cxx
+  ${CMAKE_SOURCE_DIR}/src/getDisplay.cxx
+  ${CMAKE_SOURCE_DIR}/src/handlers.cxx
+  ${CMAKE_SOURCE_DIR}/src/mainProc.cxx
+  ${CMAKE_SOURCE_DIR}/src/processInput.cxx
+  ${CMAKE_SOURCE_DIR}/src/render.cxx
+  ${CMAKE_SOURCE_DIR}/src/scaling.cxx
+  ${CMAKE_SOURCE_DIR}/src/update.cxx
+)
 
-add_executable(woman_pong "tests/main.cxx" ${includes})
-target_compile_options(woman_pong PRIVATE -std=c++20 -Wall -Wextra -Wpedantic -Werror -I/usr/include/SDL2)
+add_executable(woman_pong ${CMAKE_SOURCE_DIR}/src/main.cxx)
+target_link_libraries(woman_pong PRIVATE libwoman_pong -lSDL2 -lSDL2_ttf -lSDL2_image -lX11)
 
-add_library(woman_ponglib SHARED ${library_sources})
-target_link_libraries(woman_pong woman_ponglib -lSDL2main -lSDL2_image -lSDL2_ttf -lX11 -static-libgcc -static-libstdc++)
+set_target_properties(woman_pong PROPERTIES
+  LINK_FLAGS "-Wl,-rpath=lib/"
+)
+
+set_target_properties(libwoman_pong PROPERTIES
+  OUTPUT_NAME woman_pong
+)
 
 
